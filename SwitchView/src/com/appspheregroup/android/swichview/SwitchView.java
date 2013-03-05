@@ -17,14 +17,15 @@ limitations under the License.
 
 package com.appspheregroup.android.swichview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.Paint.Align;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Drawable.ConstantState;
@@ -114,7 +115,10 @@ public class SwitchView extends View {
 					if(a.getDrawable(attr) instanceof StateListDrawable){
 						isStateListDrawable =true;
 						stateListDrawable =(StateListDrawable) a.getDrawable(attr);
-						stateListDrawable.mutate(); // make sure that we aren't sharing state anymore
+						try {
+							stateListDrawable.mutate(); // make sure that we aren't sharing state anymore
+						} catch (Exception e) {
+						}
 
 			            ConstantState constantState = stateListDrawable.getConstantState();
 			            if (constantState instanceof DrawableContainerState) {
@@ -153,6 +157,7 @@ public class SwitchView extends View {
 		this.mSwitchChangeListener = mSwitchChangeListener;
 	}
 
+	@SuppressLint("WrongCall")
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
