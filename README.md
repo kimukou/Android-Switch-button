@@ -1,3 +1,7 @@
+update API-4 support
+=====================
+
+
 Android-Switch-button
 =====================
 
